@@ -5,6 +5,7 @@ from mode import GameModeObserver
 WORLD_WIDTH = 1200
 WORLD_HEIGHT = 300
 
+
 class UserInterface(GameModeObserver):
 
     def __init__(self):
@@ -29,7 +30,7 @@ class UserInterface(GameModeObserver):
 
     def run(self):
         while self.running:
-            self.window.fill((255,255,255))
+            self.window.fill((255, 255, 255))
 
             # Inputs and updates are exclusives
             if self.playGameMode is not None:
@@ -39,5 +40,5 @@ class UserInterface(GameModeObserver):
 
             # Update display
             pygame.display.update()
-            #pygame.display.flip()
+            # pygame.display.flip()
             self.clock.tick(60)

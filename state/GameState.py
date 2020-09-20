@@ -1,6 +1,7 @@
+from pygame import Vector2
+
 from .Cloud import Cloud
 
-from pygame import Vector2
 
 class GameState():
     ACCELERATION = 0.001
@@ -28,29 +29,29 @@ class GameState():
         self.epoch = 0
         self.worldSize = Vector2(WORLD_WIDTH, WORLD_HEIGHT)
         self.worldVelocity = GameState.SPEED
-        self.clouds = [ Cloud(self, Vector2(1100, 10)) ]
+        self.clouds = [Cloud(self, Vector2(1100, 10))]
         self.observers = []
-    
+
     @property
     def worldWidth(self):
         """
         Returns the world width as an integer
         """
         return int(self.worldSize.x)
-    
+
     @property
     def worldHeight(self):
         """
         Returns the world height as an integer
         """
-        return int(self.worldSize.y)        
+        return int(self.worldSize.y)
 
     def isInside(self, position):
         """
         Returns true is position is inside the world
         """
         return position.x >= 0 and position.x < self.worldWidth \
-           and position.y >= 0 and position.y < self.worldHeight
+            and position.y >= 0 and position.y < self.worldHeight
 
     def addObserver(self, observer):
         """

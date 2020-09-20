@@ -1,5 +1,6 @@
 from .Layer import Layer
 
+
 class HorizonLayer(Layer):
     def __init__(self, imageFile, gameState, clouds):
         super().__init__(imageFile)

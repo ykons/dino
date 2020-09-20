@@ -1,6 +1,7 @@
+from pygame.math import Vector2
+
 from .GameItem import GameItem
 
-from pygame.math import Vector2
 
 class Cloud(GameItem):
     SPRITE_X = 166

@@ -1,11 +1,11 @@
-from .GameMode import GameMode
+import pygame
+from pygame.math import Vector2
 
 from state import GameState
 from layer import HorizonLayer
 from command import MoveCommand, DeleteDestroyedCommand
 
-import pygame
-from pygame.math import Vector2
+from .GameMode import GameMode
 
 
 class PlayGameMode(GameMode):
@@ -16,7 +16,8 @@ class PlayGameMode(GameMode):
 
         # Layers
         self.layers = [
-            HorizonLayer("assets/level/dino_sprites.png", self.gameState, self.gameState.clouds)
+            HorizonLayer("assets/level/dino_sprites.png",
+                         self.gameState, self.gameState.clouds)
         ]
 
         # All layers listen to game state events
@@ -50,7 +51,8 @@ class PlayGameMode(GameMode):
         # Move the world's itens
         for cloud in self.gameState.clouds:
             self.commands.append(
-                MoveCommand(self.gameState, cloud, Vector2(-1*self.gameState.worldVelocity, 0))
+                MoveCommand(self.gameState, cloud,
+                            Vector2(-1*self.gameState.worldVelocity, 0))
             )
 
         # Delete any destroyed item
@@ -65,7 +67,7 @@ class PlayGameMode(GameMode):
         self.gameState.epoch += 1
 
         # Check game over
-        #if self.playerDino.status != "alive":
+        # if self.playerDino.status != "alive":
         #    self.gameOver = True
         #    self.notifyGameLost()
 
