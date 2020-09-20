@@ -1,5 +1,2 @@
 {
-    "python.linting.pylintArgs": [
-        "--unsafe-load-any-extension=y"
-    ]
 }
