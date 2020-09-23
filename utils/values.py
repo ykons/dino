@@ -1,13 +1,13 @@
-caption = "T-Rex Rush"
-scr_size = (1200, 300)
+CAPTION = "T-Rex Rush"
+SCR_SIZE = (1200, 300)
 FPS = 60
-gravity = 0.6
+GRAVITY = 0.6
 
-black = (0,0,0)
-white = (255,255,255)
-background_col = (235,235,235)
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+BACKGROUND = (235,235,235)
 
-sprites_path = 'assets/level'
+SPRITE_PATH = 'assets/level'
 
 WORLD_WIDTH = 1200
 WORLD_HEIGHT = 300

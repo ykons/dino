@@ -16,8 +16,7 @@ class PlayGameMode(GameMode):
 
         # Layers
         self.layers = [
-            HorizonLayer("assets/level/dino_sprites.png",
-                         self.gameState, self.gameState.clouds)
+            HorizonLayer(self.gameState)
         ]
 
         # All layers listen to game state events
@@ -49,6 +48,9 @@ class PlayGameMode(GameMode):
             return
 
     def update(self):
+        for layer in self.layers:
+            layer.update()
+
         for command in self.commands:
             command.run()
         self.commands.clear()

@@ -4,9 +4,9 @@ from utils import load_image
 
 class Cloud(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self, self.containers)
-        self.image, self.rect = load_image('dino_sprites.png', 166, 2, 92, 28)
-        self.speed = 1
+        pygame.sprite.Sprite.__init__(self)
+        self.image, self.rect = load_image('dino_sprites.png', 166, 2, 92, 28, -1, -1, -1)
+        self.speed = 3
         self.rect.left = x
         self.rect.top = y
         self.movement = [-1*self.speed, 0]

@@ -1,7 +1,7 @@
 import os, random
 import pygame
 
-from .values import *
+import utils.values as vl
 
 
 def extractDigits(number):
@@ -20,7 +20,7 @@ def extractDigits(number):
 
 def load_image(name, x, y, width, height, scalex=-1, scaley=-1, colorkey=None):
 
-    fullname = os.path.join(sprites_path, name)
+    fullname = os.path.join(vl.SPRITE_PATH, name)
     sprite = pygame.image.load(fullname)
     sprite = sprite.convert()
 

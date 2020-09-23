@@ -11,7 +11,7 @@ class UserInterface(GameModeObserver):
         # Window
         pygame.init()
         self.window = pygame.display.set_mode((vl.WORLD_WIDTH, vl.WORLD_HEIGHT))
-        pygame.display.set_caption(vl.caption)
+        pygame.display.set_caption(vl.CAPTION)
         pygame.display.set_icon(pygame.image.load("assets/ui/dino.png"))
 
         # Load Game
@@ -28,7 +28,7 @@ class UserInterface(GameModeObserver):
 
     def run(self):
         while self.running:
-            self.window.fill((255, 255, 255))
+            self.window.fill(vl.WHITE)
 
             # Inputs and updates are exclusives
             if self.playGameMode is not None:

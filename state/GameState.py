@@ -13,8 +13,7 @@ class GameState():
         self.worldSize = Vector2(vl.WORLD_WIDTH, vl.WORLD_HEIGHT)
         self.worldVelocity = vl.SPEED
         self.clouds = pygame.sprite.Group()
-        Cloud.containers = self.clouds
-        Cloud(1100, 10)
+
         self.observers = []
 
     @property
