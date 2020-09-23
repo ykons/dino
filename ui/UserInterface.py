@@ -1,9 +1,7 @@
 import pygame
 
 from mode import GameModeObserver
-
-WORLD_WIDTH = 1200
-WORLD_HEIGHT = 300
+import utils.values as vl
 
 
 class UserInterface(GameModeObserver):
@@ -12,8 +10,8 @@ class UserInterface(GameModeObserver):
         from mode import PlayGameMode
         # Window
         pygame.init()
-        self.window = pygame.display.set_mode((WORLD_WIDTH, WORLD_HEIGHT))
-        pygame.display.set_caption("Dino")
+        self.window = pygame.display.set_mode((vl.WORLD_WIDTH, vl.WORLD_HEIGHT))
+        pygame.display.set_caption(vl.caption)
         pygame.display.set_icon(pygame.image.load("assets/ui/dino.png"))
 
         # Load Game

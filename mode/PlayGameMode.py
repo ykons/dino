@@ -48,18 +48,6 @@ class PlayGameMode(GameMode):
         if self.gameOver:
             return
 
-        # Move the world's itens
-        for cloud in self.gameState.clouds:
-            self.commands.append(
-                MoveCommand(self.gameState, cloud,
-                            Vector2(-1*self.gameState.worldVelocity, 0))
-            )
-
-        # Delete any destroyed item
-        self.commands.append(
-            DeleteDestroyedCommand(self.gameState.clouds)
-        )
-
     def update(self):
         for command in self.commands:
             command.run()

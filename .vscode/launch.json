@@ -8,7 +8,7 @@
             "name": "Python: Game",
             "type": "python",
             "request": "launch",
-            "program": "/Users/alexandro/Projects/Games/dino/state/main.py",
+            "program": "/Users/alexandro/Projects/Games/dino/main.py",
             "console": "integratedTerminal"
         }
     ]

@@ -1,5 +1,7 @@
 from .Layer import Layer
 
+from sprites import Cloud
+
 
 class HorizonLayer(Layer):
     def __init__(self, imageFile, gameState, clouds):
@@ -7,8 +9,8 @@ class HorizonLayer(Layer):
         self.gameState = gameState
         self.clouds = clouds
 
+    def update(self):
+        self.clouds.update()
+
     def render(self, surface):
-        for cloud in self.clouds:
-            if cloud.status == "alive":
-                self.renderTile(surface, cloud.position,
-                                cloud.tile, cloud.width, cloud.height)
+        self.clouds.draw(surface)
