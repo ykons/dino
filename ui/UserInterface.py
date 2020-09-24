@@ -17,7 +17,6 @@ class UserInterface(GameModeObserver):
         # Load Game
         self.playGameMode = PlayGameMode()
         self.playGameMode.addObserver(self)
-        self.playGameMode.update()
 
         # Loop properties
         self.clock = pygame.time.Clock()
@@ -33,7 +32,7 @@ class UserInterface(GameModeObserver):
             # Inputs and updates are exclusives
             if self.playGameMode is not None:
                 self.playGameMode.processInput()
-                self.playGameMode.update()
+                self.playGameMode.update(pygame.time.get_ticks())
                 self.playGameMode.render(self.window)
 
             # Update display

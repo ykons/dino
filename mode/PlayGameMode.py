@@ -9,10 +9,13 @@ from .GameMode import GameMode
 
 
 class PlayGameMode(GameMode):
+    SPEED = 6
+
     def __init__(self):
         super().__init__()
         # Game state
         self.gameState = GameState()
+        self.currentSpeed = self.SPEED
 
         # Layers
         self.layers = [
@@ -47,9 +50,9 @@ class PlayGameMode(GameMode):
         if self.gameOver:
             return
 
-    def update(self):
+    def update(self, runningTime):
         for layer in self.layers:
-            layer.update()
+            layer.update(runningTime, self.currentSpeed)
 
         for command in self.commands:
             command.run()
