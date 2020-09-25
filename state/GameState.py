@@ -10,9 +10,12 @@ class GameState():
 
     def __init__(self):
         self.epoch = 0
+        self.score = 0
+        self.high_score = 0
         self.worldSize = Vector2(vl.WORLD_WIDTH, vl.WORLD_HEIGHT)
-        self.worldVelocity = vl.SPEED
+        self.currentSpeed = vl.SPEED
         self.clouds = pygame.sprite.Group()
+        self.ground = pygame.sprite.Group()
 
         self.observers = []
 

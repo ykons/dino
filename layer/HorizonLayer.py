@@ -4,7 +4,7 @@ import pygame
 
 from .Layer import Layer
 
-from sprites import Cloud
+from sprites import *
 import utils.values as vl
 
 
@@ -17,7 +17,11 @@ class HorizonLayer(Layer):
 
     def __init__(self, gameState):
         self.gameState = gameState
+
         self.clouds = self.gameState.clouds
+        self.ground = Ground()
+        self.scoreboard = Scoreboard()
+
         self.cloudFrequency = self.CLOUD_FREQUENCY
         self.cloudSpeed = self.BG_CLOUD_SPEED
         self.time = pygame.time.get_ticks()
@@ -47,6 +51,10 @@ class HorizonLayer(Layer):
         self.time = runningTime;
         
         self.updateClouds(deltaTime, currentSpeed)
+        self.ground.update(deltaTime, currentSpeed)
+        self.scoreboard.update(self.gameState.score)
 
     def render(self, surface):
-        self.gameState.clouds.draw(surface)
+        self.clouds.draw(surface)
+        self.ground.draw(surface)
+        self.scoreboard.draw(surface)

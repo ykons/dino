@@ -9,13 +9,10 @@ from .GameMode import GameMode
 
 
 class PlayGameMode(GameMode):
-    SPEED = 6
-
     def __init__(self):
         super().__init__()
         # Game state
         self.gameState = GameState()
-        self.currentSpeed = self.SPEED
 
         # Layers
         self.layers = [
@@ -52,7 +49,7 @@ class PlayGameMode(GameMode):
 
     def update(self, runningTime):
         for layer in self.layers:
-            layer.update(runningTime, self.currentSpeed)
+            layer.update(runningTime, self.gameState.currentSpeed)
 
         for command in self.commands:
             command.run()
@@ -63,6 +60,12 @@ class PlayGameMode(GameMode):
         # if self.playerDino.status != "alive":
         #    self.gameOver = True
         #    self.notifyGameLost()
+
+        if self.gameState.epoch%7 == 6:
+            self.gameState.score += 1
+
+        if self.gameState.epoch%700 == 699:
+            self.gameState.currentSpeed += 1
 
     def render(self, window):
         for layer in self.layers:

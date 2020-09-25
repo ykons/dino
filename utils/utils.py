@@ -41,11 +41,17 @@ def load_image(name, x, y, width, height, scalex=-1, scaley=-1, colorkey=None):
     return (image, image.get_rect())
 
 
-def load_sprite_sheet(sheetname, nx, ny, scalex=-1, scaley=-1, colorkey=None, t=False):
+def load_sprite_sheet(sheetname, x, y, width, height, nx, ny, scalex=-1, scaley=-1, colorkey=None):
 
-    fullname = os.path.join('sprites', sheetname)
-    sheet = pygame.image.load(fullname)
+    fullname = os.path.join(vl.SPRITE_PATH, sheetname)
+    sprite = pygame.image.load(fullname)
+    sprite = sprite.convert()
+
+    rect = pygame.Rect((x, y, width, height))
+    sheet = pygame.Surface(rect.size)
+
     sheet = sheet.convert()
+    sheet.blit(sprite, (0, 0), rect)
 
     sheet_rect = sheet.get_rect()
 
