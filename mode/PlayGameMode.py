@@ -2,7 +2,7 @@ import pygame
 from pygame.math import Vector2
 
 from state import GameState
-from layer import HorizonLayer
+from layer import HorizonLayer, DinoLayer
 from command import MoveCommand, DeleteDestroyedCommand
 
 from .GameMode import GameMode
@@ -16,7 +16,8 @@ class PlayGameMode(GameMode):
 
         # Layers
         self.layers = [
-            HorizonLayer(self.gameState)
+            HorizonLayer(self.gameState),
+            DinoLayer(self.gameState)
         ]
 
         # All layers listen to game state events
@@ -24,6 +25,7 @@ class PlayGameMode(GameMode):
             self.gameState.addObserver(layer)
 
         # Controls
+        self.dino = self.gameState.dinos.sprites()[0]
         self.gameOver = False
         self.commands = []
 
@@ -46,6 +48,12 @@ class PlayGameMode(GameMode):
         # If the game is over, all commands creations are disabled
         if self.gameOver:
             return
+        
+        # Keyboard controls the moves of the player's unit
+        if moveVector.x != 0 or moveVector.y != 0:
+            self.commands.append(
+                MoveCommand(self.gameState, self.dino, moveVector)
+            )
 
     def update(self, runningTime):
         for layer in self.layers:
@@ -54,7 +62,6 @@ class PlayGameMode(GameMode):
         for command in self.commands:
             command.run()
         self.commands.clear()
-        self.gameState.epoch += 1
 
         # Check game over
         # if self.playerDino.status != "alive":
@@ -66,6 +73,8 @@ class PlayGameMode(GameMode):
 
         if self.gameState.epoch%700 == 699:
             self.gameState.currentSpeed += 1
+        
+        self.gameState.epoch += 1
 
     def render(self, window):
         for layer in self.layers:

@@ -14,6 +14,8 @@ class GameState():
         self.high_score = 0
         self.worldSize = Vector2(vl.WORLD_WIDTH, vl.WORLD_HEIGHT)
         self.currentSpeed = vl.SPEED
+
+        self.dinos  = pygame.sprite.Group()
         self.clouds = pygame.sprite.Group()
         self.ground = pygame.sprite.Group()
 
