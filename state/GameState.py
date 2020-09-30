@@ -1,7 +1,7 @@
 import pygame
 from pygame import Vector2
 
-import utils.values as vl
+from utils.values import WORLD_WIDTH, WORLD_HEIGHT, SPEED
 
 from sprites import Cloud
 
@@ -12,8 +12,8 @@ class GameState():
         self.epoch = 0
         self.score = 0
         self.high_score = 0
-        self.worldSize = Vector2(vl.WORLD_WIDTH, vl.WORLD_HEIGHT)
-        self.currentSpeed = vl.SPEED
+        self.worldSize = Vector2(WORLD_WIDTH, WORLD_HEIGHT)
+        self.currentSpeed = SPEED
 
         self.dinos  = pygame.sprite.Group()
         self.clouds = pygame.sprite.Group()

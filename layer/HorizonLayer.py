@@ -5,7 +5,7 @@ import pygame
 from .Layer import Layer
 
 from sprites import *
-import utils.values as vl
+from utils.values import WORLD_WIDTH, WORLD_HEIGHT
 
 
 class HorizonLayer(Layer):
@@ -27,7 +27,7 @@ class HorizonLayer(Layer):
         self.time = pygame.time.get_ticks()
 
     def addCloud(self):
-        self.clouds.add(Cloud(vl.WORLD_WIDTH, random.randrange(Cloud.MAX_SKY_LEVEL, Cloud.MIN_SKY_LEVEL)))
+        self.clouds.add(Cloud(WORLD_WIDTH, random.randrange(Cloud.MAX_SKY_LEVEL, Cloud.MIN_SKY_LEVEL)))
 
     def updateClouds(self, deltaTime, speed):
         cloudSpeed = self.cloudSpeed / 1000 * deltaTime * speed
@@ -40,7 +40,7 @@ class HorizonLayer(Layer):
 
             # Check for adding a new cloud.
             if (numClouds < self.MAX_CLOUDS and \
-                (vl.WORLD_WIDTH - lastCloud.rect.left) > lastCloud.cloudGap and \
+                (WORLD_WIDTH - lastCloud.rect.left) > lastCloud.cloudGap and \
                 self.cloudFrequency > random.random()):
                 self.addCloud()
         else:

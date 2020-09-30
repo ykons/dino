@@ -1,2 +1,1 @@
-from .MoveCommand import MoveCommand
-from .DeleteDestroyedCommand import DeleteDestroyedCommand
+from .DinoMoveCommand import DinoMoveCommand

@@ -3,7 +3,8 @@ from pygame.math import Vector2
 
 from state import GameState
 from layer import HorizonLayer, DinoLayer
-from command import MoveCommand, DeleteDestroyedCommand
+from command import DinoMoveCommand
+from utils.values import ACCELERATION, MAX_SPEED
 
 from .GameMode import GameMode
 
@@ -25,7 +26,6 @@ class PlayGameMode(GameMode):
             self.gameState.addObserver(layer)
 
         # Controls
-        self.dino = self.gameState.dinos.sprites()[0]
         self.gameOver = False
         self.commands = []
 
@@ -52,16 +52,16 @@ class PlayGameMode(GameMode):
         # Keyboard controls the moves of the player's unit
         if moveVector.x != 0 or moveVector.y != 0:
             self.commands.append(
-                MoveCommand(self.gameState, self.dino, moveVector)
+                DinoMoveCommand(self.gameState, moveVector)
             )
 
     def update(self, runningTime):
-        for layer in self.layers:
-            layer.update(runningTime, self.gameState.currentSpeed)
-
         for command in self.commands:
             command.run()
         self.commands.clear()
+
+        for layer in self.layers:
+            layer.update(runningTime, self.gameState.currentSpeed)
 
         # Check game over
         # if self.playerDino.status != "alive":
@@ -71,8 +71,8 @@ class PlayGameMode(GameMode):
         if self.gameState.epoch%7 == 6:
             self.gameState.score += 1
 
-        if self.gameState.epoch%700 == 699:
-            self.gameState.currentSpeed += 1
+        if self.gameState.currentSpeed < MAX_SPEED:
+            self.gameState.currentSpeed += ACCELERATION
         
         self.gameState.epoch += 1
 
