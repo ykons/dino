@@ -1,5 +1,5 @@
 import pygame
-import math
+
 from utils import load_sprite_sheet
 from utils.values import WORLD_WIDTH, WORLD_HEIGHT, GRAVITY, BOTTOM_PAD
 
@@ -9,9 +9,10 @@ class Dino(pygame.sprite.Sprite):
     SPRITE_Y = 2
     WIDTH = 440
     HEIGHT = 94
-    INIITAL_JUMP_VELOCITY = 12
-    MIN_JUMP_HEIGHT = 120
-    DROP_VELOCITY = 6
+    INIITAL_JUMP_VELOCITY = -18
+    MIN_JUMP_HEIGHT = 60
+    MAX_JUMP_HEIGHT = 120
+    DROP_VELOCITY = -9
     SPEED_DROP_COEFFICIENT = 3
 
     def __init__(self, sizex=-1, sizey=-1):
@@ -33,8 +34,7 @@ class Dino(pygame.sprite.Sprite):
         self.reachedMinHeight = False
         self.speedDrop = False
         self.minJumpHeight = self.groundYPos - self.MIN_JUMP_HEIGHT
-        self.jumpVelocity = self.INIITAL_JUMP_VELOCITY
-        self.movement = [0, 0]
+        self.jumpVelocity = 0
 
         self.stand_pos_width = self.rect.width
         self.duck_pos_width = self.rect1.width
@@ -54,30 +54,29 @@ class Dino(pygame.sprite.Sprite):
             self.jumpVelocity = self.DROP_VELOCITY
 
     def updateJump(self, deltaTime):
-        msPerFrame = 60
+        msPerFrame = 1000 / 60 #Trex.animFrames[this.status].msPerFrame
         framesElapsed = deltaTime / msPerFrame
 
         # Speed drop makes Trex fall faster.
         if (self.speedDrop):
-            self.yPos += math.round(self.jumpVelocity *
+            self.rect.y += round(self.jumpVelocity *
             self.SPEED_DROP_COEFFICIENT * framesElapsed)
         else:
-            self.yPos += math.round(self.jumpVelocity * framesElapsed)
+            self.rect.y += round(self.jumpVelocity * framesElapsed)
 
         self.jumpVelocity += GRAVITY * framesElapsed
 
         # Minimum height has been reached.
-        if (self.yPos < self.minJumpHeight or self.speedDrop):
+        if (self.rect.y < self.minJumpHeight or self.speedDrop):
             self.reachedMinHeight = True
 
         # Reached max height
-        if (self.yPos < self.MAX_JUMP_HEIGHT or self.speedDrop):
+        if (self.rect.y < self.MAX_JUMP_HEIGHT or self.speedDrop):
             self.endJump()
 
         # Back down at ground level. Jump completed.
-        if (self.yPos > self.groundYPos):
+        if (self.rect.y > self.groundYPos):
             self.reset()
-            self.jumpCount += 1
 
     def setSpeedDrop(self):
         self.speedDrop = True
@@ -92,21 +91,17 @@ class Dino(pygame.sprite.Sprite):
             self.isDucking = False
 
     def reset(self):
-        self.xPos = self.xInitialPos
-        self.yPos = self.groundYPos
+        self.rect.x = WORLD_WIDTH/30
+        self.rect.y = self.groundYPos
         self.jumpVelocity = 0
-        self.jumping = False
-        self.ducking = False
+        self.isJumping = False
+        self.isDucking = False
         #self.update(0, Trex.status.RUNNING)
-        self.midair = False
         self.speedDrop = False
-        self.jumpCount = 0
 
-    def update(self):
+    def update(self, deltaTime):
         if self.isJumping:
-            self.movement[1] = self.movement[1] + GRAVITY
-
-        if self.isJumping:
+            self.updateJump(deltaTime)
             self.index = 0
 
         elif self.isDucking:
@@ -125,14 +120,6 @@ class Dino(pygame.sprite.Sprite):
         else:
             self.image = self.images1[(self.index)%2]
             self.rect.width = self.duck_pos_width
-
-        self.rect = self.rect.move(self.movement)
-
-        # Minimum height has been reached.
-        if self.isJumping and self.rect.y < self.minJumpHeight:
-            self.isJumping = False
-            self.rect.y = self.groundYPos
-            self.movement[1] = 0
 
         if not self.isDead and self.counter % 7 == 6:
             self.score += 1

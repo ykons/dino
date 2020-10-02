@@ -37,7 +37,8 @@ class PlayGameMode(GameMode):
                 if event.type == pygame.QUIT:
                     self.notifyQuitRequested()
                     break
-                elif event.key == pygame.K_ESCAPE:
+                elif event.key == pygame.K_ESCAPE or \
+                    event.key == pygame.K_q:
                     self.notifyQuitRequested()
                     break
                 elif event.key == pygame.K_w:

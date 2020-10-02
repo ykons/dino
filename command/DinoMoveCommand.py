@@ -14,4 +14,4 @@ class DinoMoveCommand(Command):
         dino = self.state.dinos.sprites()[0]
 
         if (self.moveVector.y == 1):
-            dino.jump()
+            dino.startJump(self.state.currentSpeed)

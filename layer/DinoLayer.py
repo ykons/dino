@@ -18,7 +18,10 @@ class DinoLayer(Layer):
         self.time = pygame.time.get_ticks()
 
     def update(self, runningTime, currentSpeed):        
-        self.dinos.update()
+        deltaTime = runningTime - (self.time);
+        self.time = runningTime;
+
+        self.dinos.update(deltaTime)
 
     def render(self, surface):
         self.dinos.draw(surface)

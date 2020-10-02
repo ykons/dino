@@ -22,6 +22,6 @@ class Cloud(pygame.sprite.Sprite):
         self.cloudGap = random.randint(self.MIN_CLOUD_GAP, self.MAX_CLOUD_GAP)
 
     def update(self, speed):
-        self.rect = self.rect.move(-1*math.ceil(speed), 0)
+        self.rect.x -= math.ceil(speed)
         if self.rect.right < 0:
             self.kill()

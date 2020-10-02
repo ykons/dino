@@ -22,12 +22,12 @@ class Ground():
         surface.blit(self.image1, self.rect1)
 
     def update(self, deltaTime, speed):
-        increment = math.floor(-1 * speed * (FPS / 1000) * deltaTime)
+        increment = math.floor(2*speed * (FPS / 1000) * deltaTime)
 
-        #print("Ground.rect(%s, %s, %s, %s)", self.rect.top, self.rect.left, self.rect.bottom, self.rect.right)
+        #print("Ground.rect(%s)", self.rect.left)
 
-        self.rect.left += increment
-        self.rect1.left += increment
+        self.rect.left -= increment
+        self.rect1.left -= increment
 
         if self.rect.right < 0:
             self.rect.left = self.rect1.right
