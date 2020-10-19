@@ -16,6 +16,7 @@ class GameState():
         self.currentSpeed = SPEED
 
         self.dinos  = pygame.sprite.Group()
+        self.obstacles = pygame.sprite.Group()
         self.clouds = pygame.sprite.Group()
         self.ground = pygame.sprite.Group()
 
